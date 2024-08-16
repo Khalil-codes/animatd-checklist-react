@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+# Animated Checklist
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple React application that demonstrates an animated checklist using Tailwind CSS and Framer Motion.
 
-Currently, two official plugins are available:
+![Animated Checklist](/media/Animated%20Checklist.gif)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- An animated checklist with a progress bar
+- A list of tasks that can be checked and unchecked
+- A visual effect when all tasks are checked
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Getting Started
 
-- Configure the top-level `parserOptions` property like this:
+To get started with this project, follow these steps:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Clone the repository
+2. Install dependencies using `npm install`
+3. Start the development server using `npm run dev`
+4. Open your browser and navigate to `http://localhost:5173`
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Technologies Used
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Usage
+
+To use this project, simply add tasks to the `DEFAULT_ITEMS` array in `src/App.tsx`. Each task should have an `id`, `text`, and `checked` property. The `id` should be a unique string, the `text` should be the task name, and the `checked` property should be a boolean indicating whether the task is checked or not.
+
+## Contributing
+
+Contributions are welcome! If you have any suggestions or improvements, please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
