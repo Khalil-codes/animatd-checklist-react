@@ -1,27 +1,49 @@
 import { useState } from "react";
 import { List } from "lucide-react";
 import { cn } from "./lib/utils";
+import { stagger, useAnimate } from "framer-motion";
 
 const DEFAULT_ITEMS = [
-  { id: "1", text: "One", checked: true },
-  { id: "2", text: "Two", checked: true },
-  { id: "3", text: "Three", checked: true },
-  { id: "4", text: "Four", checked: false },
-  { id: "5", text: "Five", checked: true },
-  { id: "6", text: "Six", checked: true },
-  { id: "7", text: "Seven", checked: true },
+  { id: "1", text: "Task One", checked: true },
+  { id: "2", text: "Task Two", checked: true },
+  { id: "3", text: "Task Three", checked: true },
+  { id: "4", text: "Task Four", checked: false },
+  { id: "5", text: "Task Five", checked: true },
+  { id: "6", text: "Task Six", checked: true },
+  { id: "7", text: "Task Seven", checked: true },
 ];
 
 function App() {
   const [items, setItems] = useState(DEFAULT_ITEMS);
 
+  const [ref, animate] = useAnimate();
+
   const handleChange = (id: string) => {
-    setItems(
-      items.map((item) =>
-        item.id === id ? { ...item, checked: !item.checked } : item
-      )
+    const _items = items.map((item) =>
+      item.id === id ? { ...item, checked: !item.checked } : item
     );
+
+    setItems(_items);
+
+    if (_items.every((item) => item.checked)) {
+      const lastCheckedItem = items.findIndex((item) => !item.checked);
+
+      const effects = [
+        // Bounce
+        { scale: [1, 1.25, 1] },
+        // Shimmer
+        { x: [0, 2.5, -2.5, 0] },
+        // Shake
+        { rotate: [0, 15, -15, 0] },
+      ];
+
+      const delay = stagger(0.1, { from: lastCheckedItem });
+
+      const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+      animate("input", randomEffect, { duration: 0.4, delay: delay });
+    }
   };
+
   return (
     <main className="container mx-auto p-24 flex min-h-screen flex-col items-center justify-center">
       <div className="flex w-full max-w-sm flex-col rounded bg-white px-3 py-4 shadow-xl">
@@ -29,7 +51,7 @@ function App() {
           <List className="mr-3" size={24} />
           Checklist
         </p>
-        <div className="mt-4">
+        <div ref={ref} className="mt-2">
           {items.map((item) => (
             <label
               key={item.id}
