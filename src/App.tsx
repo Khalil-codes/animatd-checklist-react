@@ -44,6 +44,12 @@ function App() {
     }
   };
 
+  const progress = Math.round(
+    (items.reduce((acc, item) => (item.checked ? acc + 1 : acc), 0) /
+      items.length) *
+      100
+  );
+
   return (
     <main className="container mx-auto p-24 flex min-h-screen flex-col items-center justify-center">
       <div className="flex w-full max-w-sm flex-col rounded bg-white px-3 py-4 shadow-xl">
@@ -51,6 +57,15 @@ function App() {
           <List className="mr-3" size={24} />
           Checklist
         </p>
+        <div className="mx-2 mt-3 text-sm text-gray-400 flex gap-2 items-center">
+          <p className="w-[5ch]">{progress}%</p>
+          <div className="w-full h-[1ch] rounded-xl bg-gray-200">
+            <div
+              className="h-full rounded-xl bg-green-600 transition-all duration-300 ease-in-out"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+        </div>
         <div ref={ref} className="mt-2">
           {items.map((item) => (
             <label
